@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ethers } from "ethers";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import { setAccount } from "../../redux/user";
+import { setAccount, setNetworkID } from "../../redux/user";
 
 export default function Lander() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -17,9 +17,9 @@ export default function Lander() {
 			const newProvider = new ethers.BrowserProvider(window.ethereum);
 			const newSigner = await newProvider.getSigner();
 			const account = await newSigner.getAddress();
-			const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-			console.log("Accounts: ", accounts);
+			const network = await newProvider.getNetwork();
 			dispatch(setAccount(account));
+			dispatch(setNetworkID(network.chainId));
 		}
 	};
 
@@ -29,9 +29,11 @@ export default function Lander() {
 		} else if (!(await window.ethereum._metamask.isUnlocked())) {
 			console.log("MetaMask is locked. Please unlock MetaMask.");
 		} else {
-			const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-			if (accounts && accounts[0]) {
+			const accounts = (await window.ethereum.request({ method: "eth_requestAccounts" })) as string[];
+			const networkID = (await window.ethereum.request({ method: "eth_chainId" })) as string;
+			if (accounts && accounts[0] && networkID) {
 				dispatch(setAccount(accounts[0]));
+				dispatch(setNetworkID(parseInt(networkID, 16)));
 			}
 		}
 	};
