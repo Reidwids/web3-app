@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import Lander from "./lander/Lander";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { ethers } from "ethers";
 
 export default function Base() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -12,6 +11,7 @@ export default function Base() {
 	useEffect(() => {
 		if (account && window.ethereum) {
 			window.ethereum.on("chainChanged", () => window.location.reload());
+			window.ethereum.on("accountsChanged", () => window.location.reload());
 		}
 	}, [account]);
 
