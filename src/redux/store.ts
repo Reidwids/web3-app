@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userInfoReducer from "./user";
+import userReducer from "./user";
 
-export default configureStore({
+export const store = configureStore({
 	reducer: {
 		// Add your reducers here
-		userInfo: userInfoReducer,
+		user: userReducer,
 	},
 });
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
