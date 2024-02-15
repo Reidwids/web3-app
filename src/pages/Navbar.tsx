@@ -21,6 +21,7 @@ export default function Navbar() {
 				<AnimatePresence>
 					{account ? (
 						<motion.div
+							key={1}
 							initial={{ opacity: 0, scale: 0.5 }}
 							animate={{ opacity: 1, scale: 1 }}
 							className="w-20 text-sm flex flex-col items-center justify-center"
@@ -30,6 +31,7 @@ export default function Navbar() {
 						</motion.div>
 					) : (
 						<motion.button
+							key={2}
 							initial={{ opacity: 0, scale: 0.5 }}
 							animate={{ opacity: 1, scale: 1 }}
 							className="w-20 px-3 py-1 bg-blue-500 rounded-md text-white text-sm"

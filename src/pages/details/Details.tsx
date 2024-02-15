@@ -5,6 +5,8 @@ import { ethers } from "ethers";
 import abi from "../../utils/erc20.json";
 import { toast } from "react-toastify";
 import { defaultToastOptions } from "../../context/TransactionContext";
+import Loading from "../../components/Loading";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Details() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -64,9 +66,32 @@ export default function Details() {
 
 	return (
 		<div className="w-full flex items-center justify-center bg-neutral-800 text-white text-2xl">
-			<div className="w-full flex flex-col py-5 px-10 justify-center max-w-4xl min-h-80 shadow-2xl rounded-xl">
-				<p>Connected Account: {account}</p>
-				<p>ETH Balance: {balance ? balance : "..."}</p>
+			<div className="w-full flex flex-col py-5 px-10 justify-center max-w-4xl min-h-80  shadow-2xl rounded-xl">
+				<div className="flex space-x-3">
+					<p>ETH Balance:</p>
+					<AnimatePresence>
+						{balance ? (
+							<motion.p
+								key={1}
+								initial={{ opacity: 0, x: 5 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ duration: 1, delay: 2 }}
+							>
+								{balance}
+							</motion.p>
+						) : (
+							<motion.div
+								key={2}
+								initial={{ opacity: 1 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 1, delay: 1 }}
+							>
+								<Loading />
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</div>
 				<div className="flex text-md items-center">
 					<p>Enter a token address :</p>
 					<input
@@ -76,7 +101,31 @@ export default function Details() {
 						onChange={(e) => setTokenAddress(e.target.value)}
 					/>
 				</div>
-				<p>Token Balance: {tokenBalance ? tokenBalance : "..."}</p>
+				<div className="flex space-x-3">
+					<p>Token Balance:</p>
+					<AnimatePresence>
+						{tokenBalance ? (
+							<motion.p
+								key={1}
+								initial={{ opacity: 0, x: 5 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ duration: 1, delay: 2 }}
+							>
+								{tokenBalance}
+							</motion.p>
+						) : (
+							<motion.div
+								key={2}
+								initial={{ opacity: 1 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 1, delay: 1 }}
+							>
+								<Loading />
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</div>
 			</div>
 		</div>
 	);
