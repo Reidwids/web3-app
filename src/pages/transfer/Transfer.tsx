@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import abi from "../../utils/erc20.json";
+import { toast } from "react-toastify";
 
 export default function Transfer() {
 	const [amount, setAmount] = useState<string>("");
@@ -13,13 +14,12 @@ export default function Transfer() {
 		e.preventDefault();
 
 		if (!toAddress || !amount) {
-			console.log("Please fill in all fields");
+			toast.error("Please fill in all fields");
 			return;
 		}
 		const provider = new ethers.BrowserProvider(window.ethereum!);
 		const signer = await provider.getSigner();
 		if (tokenType === "eth") {
-			console.log("Sending Eth");
 			try {
 				const tx = {
 					to: toAddress,
@@ -28,16 +28,23 @@ export default function Transfer() {
 				const txResponse = await signer.sendTransaction(tx);
 				setTransactionData(txResponse);
 			} catch (e) {
-				console.log(e);
+				console.log("Error completing transaction", e);
+				toast.error("Error completing transaction");
 			}
 		} else {
 			if (!tokenAddress) {
-				console.log("Please fill in all fields");
+				toast.error("Please fill in all fields");
 				return;
 			}
-			const contract = new ethers.Contract(tokenAddress, abi, signer);
-			const txResponse = await contract.transfer(toAddress, ethers.parseUnits(amount, "ether"));
-			setTransactionData(txResponse);
+
+			try {
+				const contract = new ethers.Contract(tokenAddress, abi, signer);
+				const txResponse = await contract.transfer(toAddress, ethers.parseUnits(amount, "ether"));
+				setTransactionData(txResponse);
+			} catch (e) {
+				console.log("Error completing transaction", e);
+				toast.error("Error completing transaction");
+			}
 		}
 	};
 

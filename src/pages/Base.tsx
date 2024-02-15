@@ -7,6 +7,8 @@ import { RootState } from "../redux/store";
 import Details from "./details/Details";
 import Transfer from "./transfer/Transfer";
 import { TransactionProvider } from "../context/TransactionContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Base() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -24,6 +26,7 @@ export default function Base() {
 				<Navbar />
 				<div className="min-w-full min-h-[calc(100vh-88px)] flex justify-center ">
 					<TransactionProvider>
+						<ToastContainer />
 						<Routes>
 							<Route path="/" element={<Lander />} />
 							<Route path="/details" element={<Details />} />
