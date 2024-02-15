@@ -8,6 +8,7 @@ import { toast, ToastOptions } from "react-toastify";
 
 export const TransactionContext = React.createContext({
 	connectWallet: async () => {},
+	disconnectWallet: async () => {},
 	isConnecting: true,
 });
 
@@ -62,6 +63,10 @@ export const TransactionProvider = ({ children }: { children: any }) => {
 		setIsConnecting(false);
 	};
 
+	const disconnectWallet = async () => {
+		dispatch(setAccount(""));
+	};
+
 	useEffect(() => {
 		autoConnect();
 	}, []);
@@ -69,8 +74,15 @@ export const TransactionProvider = ({ children }: { children: any }) => {
 	useEffect(() => {
 		if (!account) {
 			navigate("/");
+		} else if (account && window.ethereum) {
+			window.ethereum.on("chainChanged", () => window.location.reload());
+			window.ethereum.on("accountsChanged", () => window.location.reload());
 		}
 	}, [account]);
 
-	return <TransactionContext.Provider value={{ connectWallet, isConnecting }}>{children}</TransactionContext.Provider>;
+	return (
+		<TransactionContext.Provider value={{ connectWallet, disconnectWallet, isConnecting }}>
+			{children}
+		</TransactionContext.Provider>
+	);
 };
