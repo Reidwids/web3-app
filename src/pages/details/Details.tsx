@@ -52,6 +52,7 @@ export default function Details() {
 	}, []);
 
 	useEffect(() => {
+		setTokenBalance("");
 		if (tokenAddress) {
 			getTokenBalance(tokenAddress);
 		}
