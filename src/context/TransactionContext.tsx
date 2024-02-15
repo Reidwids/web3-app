@@ -47,8 +47,6 @@ export const TransactionProvider = ({ children }: { children: any }) => {
 		setIsConnecting(true);
 		if (window.ethereum == null) {
 			toast.warning("MetaMask not installed. Please install MetaMask.", defaultToastOptions);
-		} else if (!(await window.ethereum._metamask.isUnlocked())) {
-			toast.warning("MetaMask is locked. Please unlock MetaMask.", defaultToastOptions);
 		} else {
 			try {
 				const newProvider = new ethers.BrowserProvider(window.ethereum);
@@ -56,8 +54,15 @@ export const TransactionProvider = ({ children }: { children: any }) => {
 				const account = await newSigner.getAddress();
 				dispatch(setAccount(account));
 			} catch (error) {
-				console.error(error);
-				toast.error("Failed to connect to MetaMask.", defaultToastOptions);
+				console.log("Metamask connection error: ", error);
+				toast.error(
+					<div>
+						Failed to connect to MetaMask.
+						<br />
+						Is your wallet Locked?
+					</div>,
+					defaultToastOptions
+				);
 			}
 		}
 		setIsConnecting(false);
