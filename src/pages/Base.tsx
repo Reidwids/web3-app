@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import Details from "./details/Details";
 import Transfer from "./transfer/Transfer";
+import { TransactionProvider } from "../context/TransactionContext";
 
 export default function Base() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -21,12 +22,14 @@ export default function Base() {
 		<BrowserRouter>
 			<div className="w-full min-h-screen flex flex-col items-center">
 				<Navbar />
-				<div className="min-w-full min-h-[calc(100vh-72px)] flex justify-center ">
-					<Routes>
-						<Route path="/" element={<Lander />} />
-						<Route path="/details" element={<Details />} />
-						<Route path="/transfer" element={<Transfer />} />
-					</Routes>
+				<div className="min-w-full min-h-[calc(100vh-88px)] flex justify-center ">
+					<TransactionProvider>
+						<Routes>
+							<Route path="/" element={<Lander />} />
+							<Route path="/details" element={<Details />} />
+							<Route path="/transfer" element={<Transfer />} />
+						</Routes>
+					</TransactionProvider>
 				</div>
 			</div>
 		</BrowserRouter>
