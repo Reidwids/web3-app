@@ -7,6 +7,7 @@ export default function Transfer() {
 	const [toAddress, setToAddress] = useState<string>("");
 	const [tokenAddress, setTokenAddress] = useState<string>("");
 	const [tokenType, setTokenType] = useState<"eth" | "token">("eth");
+	const [transactionData, setTransactionData] = useState<any>({});
 
 	const sendTransaction = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -25,6 +26,7 @@ export default function Transfer() {
 					value: ethers.parseEther(amount),
 				};
 				const txResponse = await signer.sendTransaction(tx);
+				setTransactionData(txResponse);
 			} catch (e) {
 				console.log(e);
 			}
@@ -35,7 +37,7 @@ export default function Transfer() {
 			}
 			const contract = new ethers.Contract(tokenAddress, abi, signer);
 			const txResponse = await contract.transfer(toAddress, ethers.parseUnits(amount, "ether"));
-			console.log(txResponse);
+			setTransactionData(txResponse);
 		}
 	};
 
