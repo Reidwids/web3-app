@@ -14,7 +14,8 @@ export default function Lander() {
 
 	return (
 		<div className="w-full flex items-center justify-center bg-neutral-800">
-			<div className="w-full flex items-center justify-center max-w-4xl min-h-80 shadow-2xl rounded-xl bg-neutral-700">
+			<div className="w-full flex flex-col items-center max-w-4xl mx-10 p-10 shadow-2xl rounded-xl bg-neutral-700">
+				<h2 className="text-4xl text-white mb-12 ">Welcome to my Web3 App</h2>
 				<AnimatePresence>
 					{account ? (
 						<motion.div

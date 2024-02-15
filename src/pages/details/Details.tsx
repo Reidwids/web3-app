@@ -67,65 +67,68 @@ export default function Details() {
 
 	return (
 		<div className="w-full flex items-center justify-center bg-neutral-800 text-white text-2xl">
-			<div className="w-full flex flex-col py-5 px-10 justify-center max-w-4xl min-h-80  shadow-2xl rounded-xl">
-				<div className="flex space-x-3">
-					<p>ETH Balance:</p>
-					<AnimatePresence>
-						{balance ? (
-							<motion.p
-								key={1}
-								initial={{ opacity: 0, x: 5 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ duration: 1, delay: 2 }}
-							>
-								{balance}
-							</motion.p>
-						) : (
-							<motion.div
-								key={2}
-								initial={{ opacity: 1 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-								transition={{ duration: 1, delay: 1 }}
-							>
-								<Loading />
-							</motion.div>
-						)}
-					</AnimatePresence>
-				</div>
-				<div className="flex text-md items-center">
-					<p>Enter a token address :</p>
-					<input
-						className="text-black ml-3 py-1 px-2 rounded-md"
-						style={{ fontSize: "18px" }}
-						defaultValue={"0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"}
-						onChange={(e) => setTokenAddress(e.target.value)}
-					/>
-				</div>
-				<div className="flex space-x-3">
-					<p>Token Balance:</p>
-					<AnimatePresence>
-						{tokenBalance ? (
-							<motion.p
-								key={1}
-								initial={{ opacity: 0, x: 5 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ duration: 1, delay: 2 }}
-							>
-								{tokenBalance}
-							</motion.p>
-						) : (
-							<motion.div
-								key={2}
-								initial={{ opacity: 1 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
-								transition={{ duration: 1, delay: 1 }}
-							>
-								<Loading />
-							</motion.div>
-						)}
-					</AnimatePresence>
+			<div className="w-full flex flex-col items-center max-w-4xl mx-10 p-10 shadow-2xl rounded-xl bg-neutral-700">
+				<h2 className="text-4xl text-white mb-10 w-full text-center">Wallet Details</h2>
+				<div className="space-y-3">
+					<div className="flex space-x-3">
+						<p>ETH Balance:</p>
+						<AnimatePresence>
+							{balance ? (
+								<motion.p
+									key={1}
+									initial={{ opacity: 0, x: 5 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ duration: 1, delay: 2 }}
+								>
+									{balance}
+								</motion.p>
+							) : (
+								<motion.div
+									key={2}
+									initial={{ opacity: 1 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 1, delay: 1 }}
+								>
+									<Loading />
+								</motion.div>
+							)}
+						</AnimatePresence>
+					</div>
+					<div className="flex text-md items-center">
+						<p>Enter a token address :</p>
+						<input
+							className="text-black ml-3 py-1 px-2 rounded-md"
+							style={{ fontSize: "18px" }}
+							defaultValue={"0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6"}
+							onChange={(e) => setTokenAddress(e.target.value)}
+						/>
+					</div>
+					<div className="flex space-x-3">
+						<p>Token Balance:</p>
+						<AnimatePresence>
+							{tokenBalance ? (
+								<motion.p
+									key={1}
+									initial={{ opacity: 0, x: 5 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ duration: 1, delay: 2 }}
+								>
+									{tokenBalance}
+								</motion.p>
+							) : (
+								<motion.div
+									key={2}
+									initial={{ opacity: 1 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 1, delay: 1 }}
+								>
+									<Loading />
+								</motion.div>
+							)}
+						</AnimatePresence>
+					</div>
 				</div>
 			</div>
 		</div>

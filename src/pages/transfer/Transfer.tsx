@@ -53,8 +53,9 @@ export default function Transfer() {
 
 	return (
 		<div className="w-full flex items-center justify-center bg-neutral-800 text-white">
-			<div className="w-full flex flex-col items-center justify-center max-w-4xl min-h-80 shadow-2xl rounded-xl">
-				<div className="flex justify-center w-full text-lg rounded-xl overflow-hidden max-w-60">
+			<div className="w-full flex flex-col items-center justify-center max-w-4xl mx-10 p-10 shadow-2xl rounded-xl bg-neutral-700">
+				<h2 className="text-4xl text-white mb-10 w-full text-center">Transfer Tokens</h2>
+				<div className="flex justify-center w-full text-lg rounded-xl overflow-hidden max-w-60 ">
 					<motion.div
 						animate={{
 							backgroundColor: tokenType === "eth" ? "rgb(30 64 175)" : "rgb(23 37 84)",
@@ -66,7 +67,7 @@ export default function Transfer() {
 						ETH
 					</motion.div>
 					<motion.div
-						className="bg-blue-950 w-1/2 p-2 py-2 text-center cursor-pointer"
+						className="bg-blue-950 w-1/2 p-2 text-center cursor-pointer"
 						animate={{
 							backgroundColor: tokenType !== "eth" ? "rgb(30 64 175)" : "rgb(23 37 84)",
 							transition: { duration: 0.3 },
@@ -76,7 +77,7 @@ export default function Transfer() {
 						TOKEN
 					</motion.div>
 				</div>
-				<form className="flex flex-col items-start my-10">
+				<form className="flex flex-col items-start mt-4">
 					<label>To Address:</label>
 					<input
 						className="w-80 p-2 m-2 text-black rounded-md"
