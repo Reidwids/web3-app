@@ -18,7 +18,6 @@ export default function Lander() {
 				<AnimatePresence>
 					{account ? (
 						<motion.div
-							key={1}
 							className="flex flex-col items-center justify-center"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
@@ -30,7 +29,6 @@ export default function Lander() {
 						</motion.div>
 					) : (
 						<motion.button
-							key={2}
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							className="px-5 py-3 w-fit bg-blue-500 rounded-md text-white"
