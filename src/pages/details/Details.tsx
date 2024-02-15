@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
-import abi from "../../utils/abi.json";
+import abi from "../../utils/erc20.json";
 
 export default function Details() {
 	const { account } = useSelector((state: RootState) => state.user);
 	const [balance, setBalance] = useState<string>("");
 	const [tokenBalance, setTokenBalance] = useState<string>("");
-	const [tokenAddress, setTokenAddress] = useState<string>("");
+	const [tokenAddress, setTokenAddress] = useState<string>("0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6");
 
 	async function getEthBalance() {
 		const balance = (await window.ethereum!.request({
@@ -46,7 +46,7 @@ export default function Details() {
 	useEffect(() => {
 		if (account) {
 			getEthBalance();
-			getTokenBalance("0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6");
+			getTokenBalance(tokenAddress);
 		}
 	}, [account]);
 
