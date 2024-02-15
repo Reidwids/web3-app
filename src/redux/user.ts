@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
 	name: "user",
 	initialState: {
-		account: null,
-		networkID: null,
+		account: null as string | null,
+		networkID: null as number | null,
 	},
 	reducers: {
 		setAccount: (state, action) => {

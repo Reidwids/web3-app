@@ -39,6 +39,7 @@ export default function Lander() {
 	};
 
 	useEffect(() => {
+		document.title = "Web3 App";
 		autoConnect();
 	}, []);
 

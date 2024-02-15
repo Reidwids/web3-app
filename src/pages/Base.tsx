@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import Lander from "./lander/Lander";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import Details from "./details/Details";
+import Transfer from "./transfer/Transfer";
 
 export default function Base() {
 	const { account } = useSelector((state: RootState) => state.user);
@@ -16,17 +18,17 @@ export default function Base() {
 	}, [account]);
 
 	return (
-		<div className="w-full min-h-screen flex flex-col items-center">
-			<Navbar />
-			<div className="min-w-full min-h-[calc(100vh-72px)] flex justify-center ">
-				<BrowserRouter>
+		<BrowserRouter>
+			<div className="w-full min-h-screen flex flex-col items-center">
+				<Navbar />
+				<div className="min-w-full min-h-[calc(100vh-72px)] flex justify-center ">
 					<Routes>
 						<Route path="/" element={<Lander />} />
-						{/* <Route path="/Details" element={<Lander />} />
-						<Route path="/Transfer" element={<Lander />} /> */}
+						<Route path="/details" element={<Details />} />
+						<Route path="/transfer" element={<Transfer />} />
 					</Routes>
-				</BrowserRouter>
+				</div>
 			</div>
-		</div>
+		</BrowserRouter>
 	);
 }
