@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "jura";
+	src: url("/fonts/Jura-VariableFont_wght.ttf");
+	font-weight: 500;
+}
