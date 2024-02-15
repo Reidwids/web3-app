@@ -27,6 +27,7 @@ export default function Transfer() {
 					value: ethers.parseEther(amount),
 				};
 				await signer.sendTransaction(tx);
+				toast.success("Transaction sent", defaultToastOptions);
 			} catch (e) {
 				console.log("Error completing transaction", e);
 				toast.error("Error completing transaction", defaultToastOptions);
@@ -40,6 +41,7 @@ export default function Transfer() {
 			try {
 				const contract = new ethers.Contract(tokenAddress, abi, signer);
 				await contract.transfer(toAddress, ethers.parseUnits(amount, "ether"));
+				toast.success("Transaction sent", defaultToastOptions);
 			} catch (e) {
 				console.log("Error completing transaction", e);
 				toast.error("Error completing transaction", defaultToastOptions);
